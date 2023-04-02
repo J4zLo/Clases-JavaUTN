@@ -29,7 +29,15 @@ public class ItemDeCarrito {
         this.cantidad = cantidad;
     }
 
+    public double precioDelItemSeguro() throws SinStockException {
+        if (!this.producto.hayStockSuficiente(this.cantidad)) {
+            throw new SinStockException();
+        }
+        return this.producto.getPrecio() * this.cantidad;
+    }
+
     public double precioDelItem(){
+
         return this.producto.getPrecio()*this.cantidad;
 
     }

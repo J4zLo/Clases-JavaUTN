@@ -70,6 +70,21 @@ public class CarritoDeCompra {
         }
         return precio;
     }
+
+    public double precioBaseSeguro() throws SinStockException {
+        double precio = 0.0;
+
+        if (this.item1 != null) {
+            precio = precio + this.item1.precioDelItemSeguro();
+        }
+        if (this.item2 != null) {
+            precio += this.item2.precioDelItemSeguro();
+        }
+        if (this.item3 != null) {
+            precio += this.item3.precioDelItemSeguro();
+        }
+        return precio;
+    }
     //Metodo descuento
     public double precioFinal(){
         if (this.descuento==null ) {

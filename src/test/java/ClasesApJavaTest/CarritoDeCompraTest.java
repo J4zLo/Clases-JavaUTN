@@ -6,6 +6,7 @@ import ClasesApJava.productos.Producto;
 import ClasesApJava.descuentos.Descuento;
 import ClasesApJava.descuentos.DescuentoFijo;
 import ClasesApJava.descuentos.DescuentoPorcentual;
+import ClasesApJava.productos.SinStockException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -19,6 +20,18 @@ public class CarritoDeCompraTest {
         ItemDeCarrito item1 = new ItemDeCarrito(arvejas, 2);
         carrito.setItem1(item1);
         Assertions.assertEquals(400, carrito.precioBase());
+    }
+
+    @Test
+    public void carritoConUnItemNotieneStock (){
+
+        CarritoDeCompra carrito = new CarritoDeCompra();
+        Producto arvejas = new Producto("Arvejas", "122", 200);
+        arvejas.setStock(7);
+        ItemDeCarrito item1 = new ItemDeCarrito(arvejas, 10);
+        carrito.setItem1(item1);
+        Assertions.assertThrowsExactly(SinStockException.class, () ->carrito.precioBaseSeguro());
+
     }
     @Test
     public void carritoConDosItemsVale500 () {

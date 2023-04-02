@@ -4,6 +4,8 @@ public class Producto implements Comprable {
     private String nombre;
     private String codigo;
     private Double precio;
+    private int stock;
+
 
 // Constructor
     public Producto(String nombre, String codigo, double precio) {
@@ -35,6 +37,18 @@ public class Producto implements Comprable {
 
     public void setPrecio(Double precio) {
         this.precio = precio;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+    public boolean hayStockSuficiente (int cant){
+        return this.stock >= cant;
+
     }
 
     @Override
