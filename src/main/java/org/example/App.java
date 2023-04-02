@@ -12,8 +12,7 @@ import ClasesApJava.productos.SinStockException;
  */
 public class App 
 {
-    public static void main( String[] args )
-    {
+    public static void main( String[] args ) {
         System.out.println( "Hello World!" );
 
        /* Persona unaPersona = new Persona("Sancho", "Panza");
@@ -55,9 +54,19 @@ public class App
         arvejas.setStock(7);
         ItemDeCarrito item1 = new ItemDeCarrito(arvejas, 10);
         carrito.setItem1(item1);
-        carrito.
+        try {
+            double precioDelCarritoSeguro = carrito.precioBaseSeguro();
+            System.out.println(precioDelCarritoSeguro);
+
+        }
+        catch (SinStockException e) {
+            System.out.println("No hay stock suficiente");
+
+        }
+        double precioDelCarrito = carrito.precioBase();
+        System.out.println(precioDelCarrito);
 
     }
 
     }//fin main
-}//Fin Main
+

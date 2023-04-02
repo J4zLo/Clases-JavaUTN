@@ -47,6 +47,22 @@ public class CarritoDeCompraTest {
 
     }
     @Test
+    public void carritoConDosItemsVale500Collection () {
+
+        CarritoDeCompra carrito = new CarritoDeCompra();
+        Producto arvejas = new Producto("Arvejas", "122", 200);
+        Producto mayonesa = new Producto("Mayonesa Natura", "138", 300);
+        ItemDeCarrito item1 = new ItemDeCarrito(arvejas, 1);
+        ItemDeCarrito item2 = new ItemDeCarrito(mayonesa, 1);
+        carrito.agregarItem(item1);
+        carrito.agregarItem(item2);
+        arvejas.setStock(10);
+        mayonesa.setStock(5);
+
+        Assertions.assertEquals(500, carrito.precioBaseList());
+    }
+
+    @Test
     public void carritoConDescuentoFijoVale480 (){
 
         CarritoDeCompra carrito2 = new CarritoDeCompra();

@@ -1,17 +1,36 @@
 package ClasesApJava.productos;
 
-
 import ClasesApJava.personas.Persona;
-
 import ClasesApJava.descuentos.Descuento;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CarritoDeCompra {
     private Persona comprador;
     private ItemDeCarrito item1;
     private ItemDeCarrito item2;
     private ItemDeCarrito item3;
+    private List<ItemDeCarrito> items; //Siempre que creo una coleccion la tengo que inicializar en el constructor!
 
     private Descuento descuento;
+
+//Metodo Construcctor:
+
+    public CarritoDeCompra() {
+        this.items = new ArrayList<>();
+    }
+    public void agregarItem (ItemDeCarrito item){
+        this.items.add(item);
+    }
+    public void eliminarItem (ItemDeCarrito item){
+        this.items.remove(item);
+    }
+    public boolean tenesItemDeCarrito (ItemDeCarrito item){
+        return this.items.contains(item);
+    }
+    public int cantDeItems (){
+        return this.items.size();
+    }
 
 
 //Setters y Getters
@@ -55,7 +74,27 @@ public class CarritoDeCompra {
     public void setItem3(ItemDeCarrito item3) {
         this.item3 = item3;
     }
-//Metodo Precion Final
+
+//Metodo Precio Base ArrayList
+    public double precioBaseList(){
+        double precio = 0.0;
+        for(ItemDeCarrito item: this.items){
+            //Por cada item instancia de la Clase ItemDeCarrito
+            //perteneciente a mi coleccion de items
+            precio +=item.precioDelItem();
+        }
+        return precio;
+    }
+
+//Metodo Precio Base ArrayList 2 (Otra OPcion)
+    public double precioBaseList2(){
+        double precio = 0.0;
+        precio = this.items.stream().mapToDouble(item->item.precioDelItem()).sum();
+
+        return precio;
+    }
+
+//Metodo Precio Base
     public double precioBase(){
         double precio = 0.0;
 

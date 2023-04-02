@@ -36,9 +36,13 @@ public class ItemDeCarrito {
         return this.producto.getPrecio() * this.cantidad;
     }
 
-    public double precioDelItem(){
+    public double precioDelItem() {
+        if (!this.producto.hayStockSuficiente(this.cantidad)) {
+            throw new SinStockException2();
+        }
+            return this.producto.getPrecio() * this.cantidad;
 
-        return this.producto.getPrecio()*this.cantidad;
+        }
 
-    }
+
 }// Fin Clase Item De Carrito
