@@ -1,6 +1,6 @@
 package ClasesApJavaTest;
 
-import dominio.personas.Persona;
+import ClasesApJava.personas.Persona;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
