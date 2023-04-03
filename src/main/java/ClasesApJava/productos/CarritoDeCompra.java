@@ -19,16 +19,20 @@ public class CarritoDeCompra {
     public CarritoDeCompra() {
         this.items = new ArrayList<>();
     }
-    public void agregarItem (ItemDeCarrito item){
+
+    public void agregarItem(ItemDeCarrito item) {
         this.items.add(item);
     }
-    public void eliminarItem (ItemDeCarrito item){
+
+    public void eliminarItem(ItemDeCarrito item) {
         this.items.remove(item);
     }
-    public boolean tenesItemDeCarrito (ItemDeCarrito item){
+
+    public boolean tenesItemDeCarrito(ItemDeCarrito item) {
         return this.items.contains(item);
     }
-    public int cantDeItems (){
+
+    public int cantDeItems() {
         return this.items.size();
     }
 
@@ -75,27 +79,29 @@ public class CarritoDeCompra {
         this.item3 = item3;
     }
 
-//Metodo Precio Base ArrayList
-    public double precioBaseList(){
+    //Metodo Precio Base ArrayList
+    public double precioBaseList() {
         double precio = 0.0;
-        for(ItemDeCarrito item: this.items){
+        for (ItemDeCarrito item : this.items) {
             //Por cada item instancia de la Clase ItemDeCarrito
             //perteneciente a mi coleccion de items
-            precio +=item.precioDelItem();
+            precio += item.precioDelItem();
         }
         return precio;
     }
 
-//Metodo Precio Base ArrayList 2 (Otra OPcion)
-    public double precioBaseList2(){
+    //Metodo Precio Base ArrayList 2 (Otra OPcion)
+// MapToDouble para sacar de una coleccion un tipo de dato y convertirlo
+// en una nueva coleccion (en este caso ademas se hace la sumatoria)
+    public double precioBaseList2() {
         double precio = 0.0;
-        precio = this.items.stream().mapToDouble(item->item.precioDelItem()).sum();
+        precio = this.items.stream().mapToDouble(item -> item.precioDelItem()).sum();
 
         return precio;
     }
 
-//Metodo Precio Base
-    public double precioBase(){
+    //Metodo Precio Base
+    public double precioBase() {
         double precio = 0.0;
 
         if (this.item1 != null) {
@@ -124,15 +130,33 @@ public class CarritoDeCompra {
         }
         return precio;
     }
+
     //Metodo descuento
-    public double precioFinal(){
-        if (this.descuento==null ) {
+    public double precioFinal() {
+        if (this.descuento == null) {
             return this.precioBase();
-        }
-        else {
+        } else {
             return this.descuento.valorFinal((this.precioBase()));
         }
-
+    }
+//Metodo  .MAP cuando mapeo mantengo la cantidad de elementos
+    public List<String> nombresDeProductos () {
+        List<String> nombres = this.items.stream().map(i -> i.getProducto().getNombre()).toList();
+        return nombres;
     }
 
-} // Fin Clase CarritoDeCompra
+//Metodo  .FILTER en esta forma de iterar la coleccion, no siempre mantiene la cant de elementos
+    public List <ItemDeCarrito> itemsConMasDe (int cant) {
+        return this.items.stream().filter(i -> i.getCantidad() > cant).toList();
+    }
+//Metodo.ALLMATCH Siempre en el Lamda tengo que poner algo re reduzca a un booleano
+//Opera como un &&
+    public boolean todosLosItemsTienenMasDe ( int cant){
+       return this.items.stream().allMatch(item -> item.getCantidad() > cant);
+    }
+//Metodo.AnyMATCH Siempre en el Lamda tengo que poner algo re reduzca a un booleano
+//Opera como un ||
+    public boolean algunItemTienenMasDe ( int cant){
+    return this.items.stream().anyMatch(item -> item.getCantidad() > cant);
+    }
+}// Fin Clase CarritoDeCompra

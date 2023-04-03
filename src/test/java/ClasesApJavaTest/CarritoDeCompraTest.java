@@ -94,4 +94,23 @@ public class CarritoDeCompraTest {
         Assertions.assertEquals(450, carrito2.precioFinal());
 
     }
+
+    @Test
+    public void carritoConItemsDeCantMayorA2 (){
+
+        CarritoDeCompra carrito = new CarritoDeCompra();
+        Producto alfajor = new Producto("Alfajor Havanna", "22", 200);
+        alfajor.setStock(3);
+        ItemDeCarrito item = new ItemDeCarrito(alfajor, 3);
+        carrito.agregarItem(item);
+
+        Producto gaseosa = new Producto("Fanta", "37", 100);
+        gaseosa.setStock(5);
+        ItemDeCarrito itemGaseosa = new ItemDeCarrito(gaseosa, 4);
+        carrito.agregarItem(itemGaseosa);
+
+        Assertions.assertTrue(carrito.todosLosItemsTienenMasDe(2));
+        Assertions.assertTrue(carrito.algunItemTienenMasDe(3));
+        Assertions.assertFalse(carrito.algunItemTienenMasDe(4));
+    }
 }
